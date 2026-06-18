@@ -360,6 +360,91 @@ td strong {
     background: rgba(0, 0, 0, 0.2) !important;
     font-size: 1.1rem;
 }
+/* --- CLASSIFICA DEFINITIVA MONACI'S LEAGUE (PC + MOBILE RESPONSIVE) --- */
+.kl-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.kl-main-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: var(--gold);
+}
+
+.kl-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Stacco netto tra le righe */
+    background: transparent;
+}
+
+/* Intestazioni rialzate (Scritte NERE su fondo chiaro) */
+.kl-table th {
+    background: #e0e0e0;
+    color: #000000 !important;
+    font-size: 0.9rem;
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ccc;
+}
+
+.kl-table td {
+    padding: 12px 10px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Quadratini delle Posizioni (POS) */
+.pos-num {
+    width: 50px;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+/* Prime due posizioni VERDI */
+.pos-semi .pos-num { 
+    background: #00ff44 !important; 
+    color: #000 !important; 
+}
+/* Dalla terza alla sesta col colore richiesto #ffa800 */
+.pos-quarti .pos-num { 
+    background: #ffa800 !important; 
+    color: #000 !important; 
+}
+
+/* Colonna Nome Squadra (con il Logo e la Sigla a 3 lettere) */
+.team-name {
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-left: 20px !important;
+}
+
+.team-name img {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+}
+
+.team-name span {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+/* Colonna dei Punti (PT) */
+.pt-val {
+    background: rgba(0, 0, 0, 0.2) !important;
+    font-size: 1.1rem;
+}
 
 /* --- COLORI IDENTITÀ ESATTI DA GRAFICA CANVA --- */
 .team-calabroni { background: #103cd6; }
@@ -406,7 +491,7 @@ td strong {
     border-radius: 2px;
 }
 .semi { background: #00ff44; }
-.quarti { background: #c8963e; }
+.quarti { background: #ffa800; } /* Colore Quarti Legenda #ffa800 */
 
 /* --- REGOLE SPECIFICHE PER DISPOSITIVI MOBILI --- */
 @media screen and (max-width: 480px) {
@@ -415,8 +500,8 @@ td strong {
         margin-bottom: 15px;
     }
     .kl-table th, .kl-table td {
-        padding: 8px 5px; /* Stringe le celle per non farle uscire dallo schermo */
-        font-size: 0.85rem; /* Rimpicciolisce leggermente i testi */
+        padding: 8px 5px;
+        font-size: 0.85rem;
     }
     .pos-num {
         width: 35px;
@@ -428,7 +513,7 @@ td strong {
     }
     .team-name img {
         height: 24px;
-        width: 24px; /* Loghi leggermente più piccoli sul telefono */
+        width: 24px;
     }
     .team-name span {
         font-size: 0.9rem;
