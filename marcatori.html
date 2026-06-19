@@ -4,31 +4,55 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' href='style.css'>
-    <title>Marcatori</title>
+    <title>Marcatori - Monaci's League</title>
 </head>
 <body>
     <header>
-        <div class="container nav">
-            <div class="brand" style="display: flex; align-items: center; gap: 10px;">
-                <img src="logo.png" alt="Logo" height="40" style="display: block;">
+        <div class="nav">
+            <div class="brand">
+                <img src="logo.png" alt="Logo" class="logo-img">
                 <span>MONACI'S LEAGUE</span>
             </div>
-            <nav>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span><span></span><span></span>
+            </div>
+            <nav class="nav-menu" id="nav-links">
                 <a href="index.html">Home</a>
+                <a href="squadre.html">Squadre</a>
+                <a href="calendario.html">Calendario</a>
+                <a href="risultati.html">Risultati</a>
                 <a href="classifica.html">Classifica</a>
                 <a href="marcatori.html">Marcatori</a>
-                <a href="calendario.html">Calendario</a>
             </nav>
         </div>
     </header>
 
-    <div class='container'>
-        <h1>Marcatori</h1>
-        <table>
-            <tr><th>Giocatore</th><th>Gol</th></tr>
-            <tr><td>Rossi</td><td>14</td></tr>
-            <tr><td>Bianchi</td><td>11</td></tr>
+    <div class='container kl-container'>
+        <h1 class="kl-main-title">TOP MARCATORI</h1>
+        <table class="kl-table">
+            <thead>
+                <tr>
+                    <th style="text-align: left; padding-left: 15px;">Giocatore</th>
+                    <th>Gol</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #222;">
+                    <td style="text-align: left; padding-left: 15px;">Rossi</td>
+                    <td>14</td>
+                </tr>
+                <tr style="background: #1c1c1c;">
+                    <td style="text-align: left; padding-left: 15px;">Bianchi</td>
+                    <td>11</td>
+                </tr>
+            </tbody>
         </table>
     </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+    </script>
 </body>
 </html>
