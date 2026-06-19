@@ -7,8 +7,8 @@
     <title>Classifica - Monaci's League</title>
     <style>
         /* ==========================================================================
-           COMPORTAMENTO SPECIFICO PER SCHERMI GRANDI (PC / TABLET)
-           In questa modalità non viene alterato assolutamente nulla dello stile originale
+           COMPORTAMENTO SPECIFICO PER PC / TABLET
+           Non altera in alcun modo lo stile originale Kings
            ========================================================================== */
         @media screen and (min-width: 769px) {
             .mobile-fix-wrapper {
@@ -18,56 +18,58 @@
 
         /* ==========================================================================
            COMPORTAMENTO SPECIFICO PER SMARTPHONE (MOBILE)
-           Niente scorrimento: la tabella si adatta in modo fisso riducendo gli spazi morti
+           Nomi completi visibili, zero scorrimento, colonne proporzionate
            ========================================================================== */
         @media screen and (max-width: 768px) {
             .kl-container {
-                padding: 0 4px !important; /* Ottimizza lo spazio ai bordi dello schermo */
+                padding: 0 4px !important; /* Massimizza lo spazio utile dello schermo */
             }
 
             .mobile-fix-wrapper {
                 width: 100%;
-                overflow: hidden; /* Blocca tassativamente qualsiasi scorrimento laterale */
+                overflow: hidden; /* Blocca tassativamente lo scorrimento laterale */
             }
 
             .kl-table {
                 width: 100% !important;
-                table-layout: fixed; /* Forza la tabella a rispettare i limiti dello schermo */
+                table-layout: fixed; /* Costringe la tabella a stare dentro lo schermo */
+                border-spacing: 0 4px !important; /* Mantiene la spaziatura originale Kings */
             }
 
-            /* Ripartizione millimetrica delle colonne sul telefono */
-            .kl-table th:nth-child(1), .kl-table td:nth-child(1) { width: 10%; } /* POS */
-            .kl-table th:nth-child(2), .kl-table td:nth-child(2) { width: 38%; } /* TEAM */
-            .kl-table th:nth-child(3), .kl-table td:nth-child(3) { width: 8.5%; } /* V */
-            .kl-table th:nth-child(4), .kl-table td:nth-child(4) { width: 8.5%; } /* S */
-            .kl-table th:nth-child(5), .kl-table td:nth-child(5) { width: 10%; }  /* VS */
-            .kl-table th:nth-child(6), .kl-table td:nth-child(6) { width: 10%; }  /* SS */
+            /* Ripartizione delle colonne: diamo il massimo spazio possibile al TEAM (50%) */
+            .kl-table th:nth-child(1), .kl-table td:nth-child(1) { width: 8%; }   /* POS */
+            .kl-table th:nth-child(2), .kl-table td:nth-child(2) { width: 50%; }  /* TEAM (Spazio enorme per il nome completo) */
+            .kl-table th:nth-child(3), .kl-table td:nth-child(3) { width: 7%; }   /* V */
+            .kl-table th:nth-child(4), .kl-table td:nth-child(4) { width: 7%; }   /* S */
+            .kl-table th:nth-child(5), .kl-table td:nth-child(5) { width: 7.5%; } /* VS */
+            .kl-table th:nth-child(6), .kl-table td:nth-child(6) { width: 7.5%; } /* SS */
             .kl-table th:nth-child(7), .kl-table td:nth-child(7) { width: 11%; }  /* DIF */
-            .kl-table th:nth-child(8), .kl-table td:nth-child(8) { width: 11%; }  /* PT */
+            .kl-table th:nth-child(8), .kl-table td:nth-child(8) { width: 12%; }  /* PT */
 
-            /* Spaziature interne ridotte per non far toccare i numeri */
+            /* Spaziature interne ultra-ottimizzate */
             .kl-table th, 
             .kl-table td {
-                padding: 8px 2px !important;
-                font-size: 0.78rem !important; /* Rimpicciolisce i numeri per dare aria alle colonne */
+                padding: 12px 1px !important; /* Mantiene l'altezza Kings ma stringe i lati */
+                font-size: 0.78rem !important; 
                 text-align: center !important;
             }
 
-            /* Gestione del testo del team sul telefono */
+            /* Blocco Squadra ottimizzato per mostrare tutto su una riga */
             .team-name {
                 text-align: left !important;
                 display: flex !important;
                 align-items: center !important;
                 gap: 4px !important;
+                padding-left: 2px !important;
             }
             .team-name img {
-                width: 18px !important;
-                height: 18px !important;
+                width: 15px !important;  /* Logo leggermente più piccolo sul telefono per salvare i nomi */
+                height: 15px !important;
+                flex-shrink: 0;
             }
             .team-name span {
-                font-size: 0.72rem !important;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                font-size: 0.72rem !important; /* Dimensione ideale per far entrare scritte lunghe come "KING LIONS FC" */
+                white-space: nowrap !important; /* Vieta categoricamente di andare a capo */
             }
             
             .pos-num {
@@ -110,7 +112,7 @@
                 <thead>
                     <tr>
                         <th>POS</th>
-                        <th style="text-align: left;">TEAM</th>
+                        <th style="text-align: left; padding-left: 5px;">TEAM</th>
                         <th>V</th>
                         <th>S</th>
                         <th>VS</th>
@@ -154,67 +156,4 @@
                         </td>
                         <td>1</td>
                         <td>0</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>+6</td>
-                        <td class="pt-val">4</td>
-                    </tr>
-                    <tr class="pos-quarti team-darkknights">
-                        <td class="pos-num">4</td>
-                        <td class="team-name">
-                            <img src="dark-knights.png" alt="">
-                            <span>DARK KNIGHTS</span>
-                        </td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>-8</td>
-                        <td class="pt-val">3</td>
-                    </tr>
-                    <tr class="pos-quarti team-birrareal">
-                        <td class="pos-num">5</td>
-                        <td class="team-name">
-                            <img src="birrareal.png" alt="">
-                            <span>BIRRAREAL FC</span>
-                        </td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>-1</td>
-                        <td class="pt-val">1</td>
-                    </tr>
-                    <tr class="pos-quarti team-polar">
-                        <td class="pos-num">6</td>
-                        <td class="team-name">
-                            <img src="polar.png" alt="">
-                            <span>POLAR FC</span>
-                        </td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>-8</td>
-                        <td class="pt-val">0</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="kl-legenda">
-            <span><span class="box-color semi"></span> Semifinali</span>
-            <span><span class="box-color quarti"></span> Quarti di Finale</span>
-        </div>
-    </div>
-
-    <script>
-        const hamburger = document.getElementById('hamburger-menu');
-        const navMenu = document.getElementById('nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-    </script>
-</body>
-</html>
+                        <td>
