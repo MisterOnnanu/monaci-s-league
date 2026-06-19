@@ -20,10 +20,37 @@
             font-size: 1.5rem;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        
+        /* STILE DELLA LEGENDA */
+        .legend-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .legend-box {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .box-indigo { background-color: #52a3ff; }
+        .box-red { background-color: #ff3b30; }
+        .box-green { background-color: #00e676; }
+
         .match-accordion {
             background: #141414;
             border: 1px solid #222;
@@ -119,11 +146,14 @@
         /* COLORI PRECISI DAI TABELLINI DEGLI SCREENSHOT */
         .txt-indigo { color: #52a3ff !important; font-weight: bold; } /* Indaco Rigori */
         .txt-red { color: #ff3b30 !important; font-weight: bold; }    /* Rosso Autogol */
-        .txt-green { color: #00e676 !important; font-weight: bold; }  /* Verde Bonus/X2 */
+        .txt-green { color: #00e676 !important; font-weight: bold; }  /* Verde Secret Card */
 
         /* RESPONSIVE SMARTPHONE */
         @media screen and (max-width: 768px) {
             .res-container { margin: 20px auto; padding: 0 10px; }
+            .legend-container { gap: 12px; margin-bottom: 15px; }
+            .legend-item { font-size: 0.7rem; gap: 5px; }
+            .legend-box { width: 12px; height: 12px; }
             .match-header { padding: 12px 10px; gap: 5px; }
             .res-team img { height: 26px; width: 26px; }
             .res-team span { font-size: 0.76rem; }
@@ -163,6 +193,12 @@
         
         <div class="giornata-block">
             <div class="giornata-title">Giornata 2</div>
+            
+            <div class="legend-container">
+                <div class="legend-item"><div class="legend-box box-indigo"></div> Rigore Presidenziale</div>
+                <div class="legend-item"><div class="legend-box box-red"></div> Autogol</div>
+                <div class="legend-item"><div class="legend-box box-green"></div> Secret Card</div>
+            </div>
 
             <div class="match-accordion">
                 <div class="match-header" onclick="toggleAccordion(this)">
@@ -258,6 +294,12 @@
 
         <div class="giornata-block">
             <div class="giornata-title">Giornata 1</div>
+            
+            <div class="legend-container">
+                <div class="legend-item"><div class="legend-box box-indigo"></div> Rigore Presidenziale</div>
+                <div class="legend-item"><div class="legend-box box-red"></div> Autogol</div>
+                <div class="legend-item"><div class="legend-box box-green"></div> Secret Card</div>
+            </div>
 
             <div class="match-accordion">
                 <div class="match-header" onclick="toggleAccordion(this)">
