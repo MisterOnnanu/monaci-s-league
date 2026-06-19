@@ -50,9 +50,12 @@ header {
 
 .brand {
     font-weight: 900;
-    color: #fff;
+    color: var(--gold); /* MODIFICATO: Ora la scritta usa il giallo oro dello stemma */
     font-size: 1.2rem;
     letter-spacing: 1px;
+    display: flex;         /* AGGIUNTO: Allinea logo e scritta sulla stessa linea */
+    align-items: center;   /* AGGIUNTO: Centra verticalmente la scritta rispetto al logo */
+    gap: 10px;             /* AGGIUNTO: Spazio di sicurezza tra il logo e la scritta */
 }
 
 /* Menu in linea visibile su PC */
@@ -249,4 +252,6 @@ header {
         padding: 20px 0 !important;
         gap: 15px !important;
         text-align: center !important;
-        box-shadow: 0 5px 15px rgba(0,0,0,0
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+}
