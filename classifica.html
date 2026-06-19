@@ -7,47 +7,71 @@
     <title>Classifica - Monaci's League</title>
     <style>
         /* ==========================================================================
-           STILI SOLO PER SITI MOBILE (TELEFONI)
+           COMPORTAMENTO SPECIFICO PER SCHERMI GRANDI (PC / TABLET)
+           In questa modalità non viene alterato assolutamente nulla dello stile originale
            ========================================================================== */
-        @media screen and (max-width: 768px) {
-            .kl-container {
-                padding: 0 8px;
-            }
-            
-            /* Attiva lo scorrimento laterale SOLO sul telefono se lo schermo è troppo stretto */
-            .table-responsive-wrapper {
+        @media screen and (min-width: 769px) {
+            .mobile-fix-wrapper {
                 width: 100%;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                margin-bottom: 20px;
-            }
-            
-            /* Forza le colonne a non stringersi e a mantenere la spaziatura sul telefono */
-            .kl-table th, 
-            .kl-table td {
-                padding-left: 12px !important;
-                padding-right: 12px !important;
-                white-space: nowrap; /* Impedisce che i numeri o i testi vadano a capo */
-            }
-            
-            /* Ottimizzazione testi per lo schermo del telefono */
-            .team-name span {
-                font-size: 0.85rem;
-            }
-            .team-name img {
-                width: 22px;
-                height: 22px;
             }
         }
 
         /* ==========================================================================
-           STILI PER PC (SCHERMI GRANDI)
-           Rende il wrapper invisibile e inerte su desktop per non intaccare lo stile originale
+           COMPORTAMENTO SPECIFICO PER SMARTPHONE (MOBILE)
+           Niente scorrimento: la tabella si adatta in modo fisso riducendo gli spazi morti
            ========================================================================== */
-        @media screen and (min-width: 769px) {
-            .table-responsive-wrapper {
+        @media screen and (max-width: 768px) {
+            .kl-container {
+                padding: 0 4px !important; /* Ottimizza lo spazio ai bordi dello schermo */
+            }
+
+            .mobile-fix-wrapper {
                 width: 100%;
-                overflow: visible;
+                overflow: hidden; /* Blocca tassativamente qualsiasi scorrimento laterale */
+            }
+
+            .kl-table {
+                width: 100% !important;
+                table-layout: fixed; /* Forza la tabella a rispettare i limiti dello schermo */
+            }
+
+            /* Ripartizione millimetrica delle colonne sul telefono */
+            .kl-table th:nth-child(1), .kl-table td:nth-child(1) { width: 10%; } /* POS */
+            .kl-table th:nth-child(2), .kl-table td:nth-child(2) { width: 38%; } /* TEAM */
+            .kl-table th:nth-child(3), .kl-table td:nth-child(3) { width: 8.5%; } /* V */
+            .kl-table th:nth-child(4), .kl-table td:nth-child(4) { width: 8.5%; } /* S */
+            .kl-table th:nth-child(5), .kl-table td:nth-child(5) { width: 10%; }  /* VS */
+            .kl-table th:nth-child(6), .kl-table td:nth-child(6) { width: 10%; }  /* SS */
+            .kl-table th:nth-child(7), .kl-table td:nth-child(7) { width: 11%; }  /* DIF */
+            .kl-table th:nth-child(8), .kl-table td:nth-child(8) { width: 11%; }  /* PT */
+
+            /* Spaziature interne ridotte per non far toccare i numeri */
+            .kl-table th, 
+            .kl-table td {
+                padding: 8px 2px !important;
+                font-size: 0.78rem !important; /* Rimpicciolisce i numeri per dare aria alle colonne */
+                text-align: center !important;
+            }
+
+            /* Gestione del testo del team sul telefono */
+            .team-name {
+                text-align: left !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 4px !important;
+            }
+            .team-name img {
+                width: 18px !important;
+                height: 18px !important;
+            }
+            .team-name span {
+                font-size: 0.72rem !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .pos-num {
+                font-size: 0.8rem !important;
             }
         }
     </style>
@@ -81,7 +105,7 @@
     <div class='container kl-container'>
         <h1 class="kl-main-title">CLASSIFICA</h1>
         
-        <div class="table-responsive-wrapper">
+        <div class="mobile-fix-wrapper">
             <table class="kl-table">
                 <thead>
                     <tr>
