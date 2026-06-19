@@ -6,17 +6,27 @@
     <title>Monaci's League - Home</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Allineamento per i loghi nella classifica della home */
+        /* Allineamento e ingrandimento per i loghi e testi nella classifica della home */
         .home-ranked-team {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 8px 0;
+            gap: 12px;
+            margin: 12px 0;
+            font-size: 1.2rem; /* Testo più grande per la classifica */
+            font-weight: bold;
         }
         .home-ranked-team img {
-            width: 24px;
-            height: 24px;
+            width: 30px; /* Loghi leggermente più grandi per adattarsi al testo */
+            height: 30px;
             object-fit: contain;
+        }
+
+        /* Ingrandimento del testo per gli ultimi risultati */
+        .results-large-text p {
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin: 12px 0;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -55,7 +65,7 @@
         <section class="home-grid">
             <div class="home-card">
                 <h3>Ultimi Risultati</h3>
-                <div class="card-content">
+                <div class="card-content results-large-text">
                     <p>Polar FC 11-17 Grizzly FC</p>
                     <p>King Lions FC 19-10 Dark Knights</p>
                     <p>Calabroni FC 15-14 FC Birrareal</p>
