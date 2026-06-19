@@ -5,6 +5,214 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' href='style.css'>
     <title>Squadre - Monaci's League</title>
+    <style>
+        .teams-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        /* Card Principale */
+        .team-card {
+            background: #111;
+            border-radius: 8px;
+            border: 1px solid #333;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Header della Card */
+        .team-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #161616 0%, #111 100%);
+            user-select: none;
+        }
+
+        .team-card-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .team-card-brand img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .team-card-brand span {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .arrow-toggle {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        /* Contenitore Espandibile */
+        .team-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+            background: #0b0b0b;
+        }
+
+        .team-card.active .team-card-content {
+            max-height: 2000px;
+            transition: max-height 0.4s cubic-bezier(1, 0, 1, 0);
+        }
+
+        .team-card.active .arrow-toggle {
+            transform: rotate(180deg);
+        }
+
+        .details-grid {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* IL CAMPO DA CALCIO STILE PREFERITO (NERO/ANTRACITE) */
+        .soccer-field {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            height: 360px;
+            background: #1a1a1a; /* Sfondo scuro principale */
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            /* Effetto strisce verticali */
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 50%, transparent 50%);
+            background-size: 60px 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Linee del campo bianche e sottili */
+        .penalty-area {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top: none;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px;
+            height: 110px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .center-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Elemento Giocatore / Maglietta */
+        .player-node {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 85px;
+            transform: translateX(-50%);
+        }
+
+        /* Maglietta SVG pulita senza numeri */
+        .jersey {
+            width: 38px;
+            height: 38px;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.6));
+        }
+
+        /* Scritta del nome sotto la maglietta (Stile richiesto) */
+        .player-name {
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            white-space: nowrap;
+        }
+
+        .role-badge {
+            font-size: 0.55rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1px;
+        }
+
+        /* PRESIDENTE A LATO */
+        .president-node {
+            position: absolute;
+            top: 50%;
+            left: 35px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .president-label {
+            color: #ffcc00;
+            font-size: 0.55rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* COLORI DELLE SQUADRE */
+        .dkt-jersey { fill: #111111; stroke: #444; stroke-width: 1.5; } /* Nera */
+        .cal-jersey { fill: #0055ff; stroke: #fff; stroke-width: 1.5; } /* Blu */
+        .pol-jersey { fill: #ffffff; stroke: #ccc; stroke-width: 1.5; } /* Bianca */
+        .gri-jersey { fill: #ffcc00; stroke: #111; stroke-width: 1.5; } /* Gialla */
+        .bir-jersey { fill: #008837; stroke: #fff; stroke-width: 1.5; } /* Verde */
+        .kli-jersey { fill: #800020; stroke: #ffcc00; stroke-width: 1.5; } /* Rossa/Bordeaux */
+        .gk-jersey  { fill: #ff5500; stroke: #fff; stroke-width: 1.5; } /* GK Arancione */
+
+        /* COORDINATE POSIZIONI (2-1 Tattica rovesciata rispetto al centrocampo) */
+        .pos-att-l { top: 12%; left: 32%; }
+        .pos-att-r { top: 12%; left: 68%; }
+        .pos-mid   { top: 45%; left: 50%; }
+        .pos-gk    { bottom: 8%; left: 50%; }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 480px) {
+            .soccer-field { height: 320px; }
+            .jersey { width: 32px; height: 32px; }
+            .player-name { font-size: 0.68rem; }
+            .team-card-brand span { font-size: 1rem; }
+            .president-node { left: 15px; }
+            .pos-att-l { left: 35%; }
+            .pos-att-r { left: 65%; }
+        }
+    </style>
 </head>
 <body>
     
@@ -35,67 +243,306 @@
     <div class='container kl-container'>
         <h1 class="kl-main-title">SQUADRE PARTECIPANTI</h1>
         
-        <table class="kl-table">
-            <thead>
-                <tr>
-                    <th style="text-align: left; padding-left: 15px;">SQUADRA</th>
-                    <th>SIGLA</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="team-calabroni">
-                    <td class="team-name">
+        <div class="teams-wrapper">
+
+            <div class="team-card">
+                <div class="team-card-header" onclick="toggleCard(this)">
+                    <div class="team-card-brand">
                         <img src="calabroni.png" alt="">
                         <span>CALABRONI FC</span>
-                    </td>
-                    <td>CAL</td>
-                </tr>
-                <tr class="team-kinglions">
-                    <td class="team-name">
-                        <img src="king-lions.png" alt="">
-                        <span>KING LIONS FC</span>
-                    </td>
-                    <td>KLI</td>
-                </tr>
-                <tr class="team-grizzly">
-                    <td class="team-name">
-                        <img src="grizzly.png" alt="">
-                        <span>GRIZZLY FC</span>
-                    </td>
-                    <td>GRI</td>
-                </tr>
-                <tr class="team-darkknights">
-                    <td class="team-name">
+                    </div>
+                    <svg class="arrow-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="team-card-content">
+                    <div class="details-grid">
+                        <div class="soccer-field">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area"></div>
+                            
+                            <div class="president-node">
+                                <svg class="jersey cal-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Montenegro</div>
+                                <div class="president-label">PRESIDENTE</div>
+                            </div>
+
+                            <div class="player-node pos-att-l">
+                                <svg class="jersey cal-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Antonucci</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-att-r">
+                                <svg class="jersey cal-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Corcella G.</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-mid">
+                                <svg class="jersey cal-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Calabrese F.</div>
+                                <div class="role-badge">CC</div>
+                            </div>
+                            <div class="player-node pos-gk">
+                                <svg class="jersey gk-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Calabrese E.</div>
+                                <div class="role-badge">GK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-card-header" onclick="toggleCard(this)">
+                    <div class="team-card-brand">
                         <img src="dark-knights.png" alt="">
                         <span>DARK KNIGHTS</span>
-                    </td>
-                    <td>DKT</td>
-                </tr>
-                <tr class="team-birrareal">
-                    <td class="team-name">
+                    </div>
+                    <svg class="arrow-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="team-card-content">
+                    <div class="details-grid">
+                        <div class="soccer-field">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area"></div>
+                            
+                            <div class="president-node">
+                                <svg class="jersey dkt-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Dicorato</div>
+                                <div class="president-label">PRESIDENTE</div>
+                            </div>
+
+                            <div class="player-node pos-att-l">
+                                <svg class="jersey dkt-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Morelli</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-att-r">
+                                <svg class="jersey dkt-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Diella</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-mid">
+                                <svg class="jersey dkt-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Lanotte</div>
+                                <div class="role-badge">CC</div>
+                            </div>
+                            <div class="player-node pos-gk">
+                                <svg class="jersey gk-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Corcella F.</div>
+                                <div class="role-badge">GK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-card-header" onclick="toggleCard(this)">
+                    <div class="team-card-brand">
+                        <img src="king-lions.png" alt="">
+                        <span>KING LIONS FC</span>
+                    </div>
+                    <svg class="arrow-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="team-card-content">
+                    <div class="details-grid">
+                        <div class="soccer-field">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area"></div>
+                            
+                            <div class="president-node">
+                                <svg class="jersey kli-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Campaniello</div>
+                                <div class="president-label">PRESIDENTE</div>
+                            </div>
+
+                            <div class="player-node pos-att-l">
+                                <svg class="jersey kli-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Giannella</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-att-r">
+                                <svg class="jersey kli-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Torre</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-mid">
+                                <svg class="jersey kli-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Violante</div>
+                                <div class="role-badge">CC</div>
+                            </div>
+                            <div class="player-node pos-gk">
+                                <svg class="jersey gk-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Diviccaro</div>
+                                <div class="role-badge">GK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-card-header" onclick="toggleCard(this)">
+                    <div class="team-card-brand">
                         <img src="birrareal.png" alt="">
-                        <span>BIRRAREAL FC</span>
-                    </td>
-                    <td>BIR</td>
-                </tr>
-                <tr class="team-polar">
-                    <td class="team-name">
+                        <span>FC BIRRAREAL</span>
+                    </div>
+                    <svg class="arrow-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="team-card-content">
+                    <div class="details-grid">
+                        <div class="soccer-field">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area"></div>
+                            
+                            <div class="president-node">
+                                <svg class="jersey bir-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Tupputi</div>
+                                <div class="president-label">PRESIDENTE</div>
+                            </div>
+
+                            <div class="player-node pos-att-l">
+                                <svg class="jersey bir-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Battaglia</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-att-r">
+                                <svg class="jersey bir-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Dicataldo N.</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-mid">
+                                <svg class="jersey bir-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Grimaldi</div>
+                                <div class="role-badge">CC</div>
+                            </div>
+                            <div class="player-node pos-gk">
+                                <svg class="jersey gk-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Rizzitelli</div>
+                                <div class="role-badge">GK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-card-header" onclick="toggleCard(this)">
+                    <div class="team-card-brand">
+                        <img src="grizzly.png" alt="">
+                        <span>GRIZZLY FC</span>
+                    </div>
+                    <svg class="arrow-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="team-card-content">
+                    <div class="details-grid">
+                        <div class="soccer-field">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area"></div>
+                            
+                            <div class="president-node">
+                                <svg class="jersey gri-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Dicuonzo</div>
+                                <div class="president-label">PRESIDENTE</div>
+                            </div>
+
+                            <div class="player-node pos-att-l">
+                                <svg class="jersey gri-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Corcella L.</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-att-r">
+                                <svg class="jersey gri-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Maffione M.</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-mid">
+                                <svg class="jersey gri-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Maffione L.</div>
+                                <div class="role-badge">CC</div>
+                            </div>
+                            <div class="player-node pos-gk">
+                                <svg class="jersey gk-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Francavilla</div>
+                                <div class="role-badge">GK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-card-header" onclick="toggleCard(this)">
+                    <div class="team-card-brand">
                         <img src="polar.png" alt="">
                         <span>POLAR FC</span>
-                    </td>
-                    <td>POL</td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                    <svg class="arrow-toggle" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="team-card-content">
+                    <div class="details-grid">
+                        <div class="soccer-field">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area"></div>
+                            
+                            <div class="president-node">
+                                <svg class="jersey pol-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Doronzo</div>
+                                <div class="president-label">PRESIDENTE</div>
+                            </div>
+
+                            <div class="player-node pos-att-l">
+                                <svg class="jersey pol-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Ventrella</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-att-r">
+                                <svg class="jersey pol-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Silvestro</div>
+                                <div class="role-badge">ATT</div>
+                            </div>
+                            <div class="player-node pos-mid">
+                                <svg class="jersey pol-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Delvecchio</div>
+                                <div class="role-badge">CC</div>
+                            </div>
+                            <div class="player-node pos-gk">
+                                <svg class="jersey gk-jersey" viewBox="0 0 32 32"><path d="M9 4l3 3v4h8V7l3-3 4 3-2 6v11H7V13l-2-6 4-3z"/></svg>
+                                <div class="player-name">Dicataldo G.</div>
+                                <div class="role-badge">GK</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
+        function toggleCard(headerElement) {
+            const currentCard = headerElement.parentElement;
+            
+            document.querySelectorAll('.team-card').forEach(card => {
+                if (card !== currentCard) {
+                    card.classList.remove('active');
+                }
+            });
+
+            currentCard.classList.toggle('active');
+        }
+
         const hamburger = document.getElementById('hamburger-menu');
         const navMenu = document.getElementById('nav-links');
 
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
-      </script>
+    </script>
 </body>
 </html>
