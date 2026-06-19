@@ -74,6 +74,7 @@
             color: #888;
             font-weight: 700;
             margin-top: 2px;
+            text-transform: uppercase;
         }
 
         .arrow-icon {
@@ -83,12 +84,11 @@
             transition: transform 0.3s ease;
             margin-left: 5px;
         }
-        /* Rotazione della freccia quando aperto */
         .match-accordion.active .arrow-icon {
             transform: rotate(180deg);
         }
 
-        /* Pannello Marcatori (Nascosto di base) */
+        /* Pannello Marcatori */
         .match-details {
             max-height: 0;
             overflow: hidden;
@@ -108,16 +108,19 @@
         .scorers-list {
             flex: 1;
             font-size: 0.88rem;
-            color: #ccc;
+            color: #ffffff;
             line-height: 1.6;
+            font-weight: bold;
         }
         .scorers-list.home { text-align: left; }
         .scorers-list.away { text-align: right; }
         .scorers-list div { margin-bottom: 4px; }
-        .og-goal { color: #ff4444; font-weight: bold; } /* Autogol in rosso */
-        .penalty-miss { color: #555; font-style: italic; }
+        
+        /* COLORI PRECISI DAI TABELLINI DEGLI SCREENSHOT */
+        .txt-indigo { color: #52a3ff !important; font-weight: bold; } /* Colore Indaco dei Rigori */
+        .txt-red { color: #ff3b30 !important; font-weight: bold; }    /* Colore Rosso degli Autogol */
 
-        /* RESPONSIVE PER SMARTPHONE */
+        /* RESPONSIVE SMARTPHONE */
         @media screen and (max-width: 768px) {
             .res-container { margin: 20px auto; padding: 0 10px; }
             .match-header { padding: 12px 10px; gap: 5px; }
@@ -167,7 +170,7 @@
                     </div>
                     <div class="res-score-box">
                         <div class="res-score">11 - 11</div>
-                        <div class="res-sht">(1 - 0 dcr)</div>
+                        <div class="res-sht">(1 - 0 SHT)</div>
                     </div>
                     <div class="res-team away">
                         <span>GRIZZLY FC</span> <img src="grizzly.png" alt="">
@@ -177,19 +180,18 @@
                 <div class="match-details">
                     <div class="scorers-grid">
                         <div class="scorers-list home">
-                            <div>⚽ Dicataldo N. 2', 26'</div>
-                            <div>⚽ Tupputi 6', 9', 17', 26'</div>
-                            <div>⚽ Battaglia 21', 22', 23', 23'</div>
-                            <div class="og-goal">❌ Aut. 23' Battaglia (pro Grizzly)</div>
-                            <div class="penalty-miss">⚠️ 30' Rig. Sbagliato Tupputi</div>
+                            <div>DICATALDO N. 2', 26'</div>
+                            <div>TUPPUTI 6', 9', 17', 26', <span class="txt-indigo">30' RIG.PRES SBAGLIATO</span></div>
+                            <div class="txt-red">CORCELLA L. AUT.12'</div>
+                            <div>BATTAGLIA 21', 22', 23', 23'</div>
                         </div>
                         <div class="scorers-list away">
-                            <div>Lacerenza 1', 3' ⚽</div>
-                            <div>Corcella L. 7', 34' ⚽</div>
-                            <div>Maffione M. 18'x2, 21', 24' ⚽</div>
-                            <div>Maffione L. 24', 34' ⚽</div>
-                            <div class="og-goal">Aut. 12' Corcella L. (pro Birrareal) ❌</div>
-                            <div class="penalty-miss">30' Rig. Sbagliato Dicuonzo ⚠️</div>
+                            <div>1', 3' LACERENZA</div>
+                            <div>7', 34' CORCELLA L.</div>
+                            <div>18'x2, 21', 24' MAFFIONE M.</div>
+                            <div class="txt-red">AUT.23' BATTAGLIA</div>
+                            <div>24', 34' MAFFIONE L.</div>
+                            <div class="txt-indigo">30' RIG.PRES SBAGLIATO DICUONZO</div>
                         </div>
                     </div>
                 </div>
@@ -211,16 +213,16 @@
                 <div class="match-details">
                     <div class="scorers-grid">
                         <div class="scorers-list home">
-                            <div>⚽ Diella 1', 22', 23', 33', 38'</div>
-                            <div>⚽ Gol Minuti: 3', 14', 17', 20'x2</div>
-                            <div>⚽ Morelli 24', 27', 31', 34'</div>
-                            <div>⚽ Dicorato 29' (Rig.)</div>
-                            <div class="og-goal">❌ Aut. 8' Lanotte (pro Dark Knights)</div>
+                            <div>1', 22', 23', 33', 38' DIELLA</div>
+                            <div>3', 14', 17', 20'x2</div>
+                            <div>24', 27', 31', 34' MORELLI</div>
+                            <div class="txt-indigo">29' RIG.PRES SEGNATO DICORATO</div>
                         </div>
                         <div class="scorers-list away">
-                            <div>Ventrella 5', 10', 16', 18'x2, 21', 28', 30', 32', 35' ⚽</div>
-                            <div>Delvecchio 7', 37' ⚽</div>
-                            <div>Doronzo 28' (Rig.) ⚽</div>
+                            <div>VENTRELLA 5', 10', 16', 18'x2, 21', 28', 30', 32', 35'</div>
+                            <div class="txt-red">LANOTTE AUT.8'</div>
+                            <div>DELVECCHIO 7', 37'</div>
+                            <div class="txt-indigo">DORONZO 28' RIG.PRES SEGNATO</div>
                         </div>
                     </div>
                 </div>
@@ -233,7 +235,7 @@
                     </div>
                     <div class="res-score-box">
                         <div class="res-score">14 - 14</div>
-                        <div class="res-sht">(2 - 1 dcr)</div>
+                        <div class="res-sht">(2 - 1 SHT)</div>
                     </div>
                     <div class="res-team away">
                         <span>KING LIONS FC</span> <img src="king-lions.png" alt="">
@@ -243,16 +245,16 @@
                 <div class="match-details">
                     <div class="scorers-grid">
                         <div class="scorers-list home">
-                            <div>⚽ Antonucci 1', 5', 6', 7', 19'x2, 19'x2, 20', 29'</div>
-                            <div>⚽ Corcella G. 3', 11', 13'</div>
-                            <div>⚽ Montenegro 23' (Rig.)</div>
-                            <div class="og-goal">❌ Aut. 5' Calabrese F. (pro King Lions)</div>
+                            <div>ANTONUCCI 1', 5', 6', 7', 19'x2, 19'x2, 20', 29'</div>
+                            <div>CORCELLA G. 3', 11', 13'</div>
+                            <div class="txt-indigo">MONTENEGRO 23' RIG.PRES SEGNATO</div>
                         </div>
                         <div class="scorers-list away">
-                            <div>Violante 2', 10', 18'x2 ⚽</div>
-                            <div>Torre 5', 33' ⚽</div>
-                            <div>Giannella 20', 21', 22', 22', 30', 34' ⚽</div>
-                            <div>Campaniello 23' (Rig.) ⚽</div>
+                            <div>2', 10', 18'x2 VIOLANTE</div>
+                            <div>5', 33' TORRE</div>
+                            <div>20', 21', 22', 22', 30', 34' GIANNELLA</div>
+                            <div class="txt-red">AUT.5' CALABRESE F.</div>
+                            <div class="txt-indigo">23' RIG.PRES SEGNATO CAMPANIELLO</div>
                         </div>
                     </div>
                 </div>
@@ -274,18 +276,15 @@
             const accordion = element.parentElement;
             const details = accordion.querySelector('.match-details');
             
-            // Se è già aperto, lo chiude
             if (accordion.classList.contains('active')) {
                 accordion.classList.remove('active');
                 details.style.maxHeight = null;
             } else {
-                // Chiude eventuali altri accordion aperti (opzionale, per pulizia)
                 document.querySelectorAll('.match-accordion').forEach(acc => {
                     acc.classList.remove('active');
                     acc.querySelector('.match-details').style.maxHeight = null;
                 });
                 
-                // Apre quello selezionato
                 accordion.classList.add('active');
                 details.style.maxHeight = details.scrollHeight + "px";
             }
