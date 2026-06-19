@@ -4,7 +4,7 @@
 :root {
     --gold: #ffa800;
     --dark-bg: #0d0d0d;
-    --card-bg: #141414; /* Colore grigio scuro dei box della home */
+    --card-bg: #141414; /* Colore di sfondo dei box della home */
 }
 
 * {
@@ -50,12 +50,12 @@ header {
 
 .brand {
     font-weight: 900;
-    color: var(--gold);
+    color: var(--gold); /* Scritta oro come lo stemma */
     font-size: 1.2rem;
     letter-spacing: 1px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* Spazio tra logo e scritta */
 }
 
 .logo-img {
@@ -64,7 +64,7 @@ header {
     object-fit: contain;
 }
 
-/* Menu visibile su PC */
+/* Menu visibile in linea su PC */
 .nav-menu {
     display: flex; 
     flex-direction: row;
@@ -84,13 +84,13 @@ header {
     color: var(--gold);
 }
 
-/* Nascondi hamburger di default (su PC) */
+/* Nascondi hamburger di default su PC */
 .hamburger {
     display: none;
 }
 
 /* ==========================================================================
-   3. STRUTTURA HOME PAGE (HERO E SCHEDE)
+   3. STRUTTURA HOME PAGE (HERO E SCHEDE A 3 BOX)
    ========================================================================== */
 .home-hero {
     text-align: center;
@@ -119,7 +119,6 @@ header {
     margin-bottom: 50px;
 }
 
-/* Stile dei singoli Box/Card della Home */
 .home-card {
     background-color: var(--card-bg);
     border: 1px solid #222;
@@ -147,66 +146,158 @@ header {
     margin-bottom: 0;
 }
 
-/* Allineamento leggermente rientrato per le liste numerate */
 .ordered-list p {
     padding-left: 5px;
 }
 
-
 /* ==========================================================================
-   4. CODICE PER ALTRE PAGINE (Es. CLASSIFICA GENERALE)
+   4. STRUTTURA PAGINA CLASSIFICA (OTTIMIZZATA PER NOMI LUNGHI)
    ========================================================================== */
 .kl-container {
-    max-width: 700px;
+    max-width: 800px; /* Allargata leggermente per contenere i nomi completi */
     margin: 40px auto;
     padding: 0 15px;
 }
-.kl-main-title { text-align: center; font-size: 2.5rem; font-weight: 900; color: var(--gold); margin-bottom: 25px; }
-.kl-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
-.kl-table th { background: #e0e0e0; color: #000000 !important; font-size: 0.85rem; padding: 12px 6px; text-align: center; font-weight: 900; text-transform: uppercase; }
-.kl-table td { padding: 12px 6px; vertical-align: middle; text-align: center; font-weight: bold; }
-.pos-num { width: 45px; font-size: 1.2rem; font-weight: 900; }
+
+.kl-main-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: var(--gold);
+}
+
+.kl-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    background: transparent;
+}
+
+.kl-table th {
+    background: #e0e0e0;
+    color: #000000 !important;
+    font-size: 0.85rem;
+    padding: 12px 6px;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ccc;
+}
+
+.kl-table td {
+    padding: 12px 6px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pos-num {
+    width: 45px;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
 .pos-semi .pos-num { background: #00ff44 !important; color: #000 !important; }
 .pos-quarti .pos-num { background: #ffa800 !important; color: #000 !important; }
-.team-name { text-align: left !important; display: flex; align-items: center; gap: 12px; padding-left: 15px !important; }
-.team-name img { height: 32px; width: 32px; object-fit: contain; }
-.team-name span { font-size: 1.1rem; font-weight: 800; }
-.pt-val { background: rgba(0, 0, 0, 0.2) !important; font-size: 1.1rem; }
 
-/* Colori Squadre */
-.team-calabroni { background: #103cd6; } .team-calabroni .team-name { border-left: 6px solid #0a1f6a; } .team-calabroni span, .team-calabroni td { color: #ffffff !important; }
-.team-grizzly { background: #b89333; } .team-grizzly .team-name { border-left: 6px solid #82641c; } .team-grizzly span, .team-grizzly td { color: #ffffff !important; }
-.team-darkknights { background: #1e2124; } .team-darkknights .team-name { border-left: 6px solid #111214; } .team-darkknights span, .team-darkknights td { color: #ffffff !important; }
-.team-polar { background: #ffffff; } .team-polar .team-name { border-left: 6px solid #a5f2ff; } .team-polar span, .team-polar td { color: #000000 !important; }
-.team-birrareal { background: #287819; } .team-birrareal .team-name { border-left: 6px solid #16450d; } .team-birrareal span, .team-birrareal td { color: #ffffff !important; }
-.team-kinglions { background: #d61818; } .team-kinglions .team-name { border-left: 6px solid #730909; } .team-kinglions span, .team-kinglions td { color: #ffffff !important; }
+/* Configurazione Colonna Nomi Completi Squadre */
+.team-name {
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 15px !important;
+    white-space: nowrap; /* Impedisce al testo di andare a capo bruscamente */
+}
 
-.kl-legenda { display: flex; justify-content: center; gap: 30px; margin-top: 30px; font-size: 0.95rem; font-weight: bold; }
-.box-color { display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: middle; border-radius: 2px; }
-.semi { background: #00ff44; } .quarti { background: #ffa800; }
+.team-name img {
+    height: 28px;
+    width: 28px;
+    object-fit: contain;
+}
+
+.team-name span {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.pt-val {
+    background: rgba(0, 0, 0, 0.2) !important;
+    font-size: 1.1rem;
+}
 
 /* ==========================================================================
-   5. ADATTAMENTO SMARTPHONE (MOBILE RESPONSIVE)
+   5. COLORI SFONDO SQUADRE (GRAFICA CANVA)
+   ========================================================================== */
+.team-calabroni { background: #103cd6; }
+.team-calabroni .team-name { border-left: 6px solid #0a1f6a; }
+.team-calabroni span, .team-calabroni td { color: #ffffff !important; }
+
+.team-grizzly { background: #b89333; }
+.team-grizzly .team-name { border-left: 6px solid #82641c; }
+.team-grizzly span, .team-grizzly td { color: #ffffff !important; }
+
+.team-darkknights { background: #1e2124; }
+.team-darkknights .team-name { border-left: 6px solid #111214; }
+.team-darkknights span, .team-darkknights td { color: #ffffff !important; }
+
+.team-polar { background: #ffffff; }
+.team-polar .team-name { border-left: 6px solid #a5f2ff; }
+.team-polar span, .team-polar td { color: #000000 !important; }
+
+.team-birrareal { background: #287819; }
+.team-birrareal .team-name { border-left: 6px solid #16450d; }
+.team-birrareal span, .team-birrareal td { color: #ffffff !important; }
+
+.team-kinglions { background: #d61818; }
+.team-kinglions .team-name { border-left: 6px solid #730909; }
+.team-kinglions span, .team-kinglions td { color: #ffffff !important; }
+
+/* Legenda della tabella */
+.kl-legenda {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.box-color {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.semi { background: #00ff44; }
+.quarti { background: #ffa800; }
+
+/* ==========================================================================
+   6. ADATTAMENTO SMARTPHONE (MOBILE RESPONSIVE COMPLETO)
    ========================================================================== */
 @media screen and (max-width: 768px) {
-    /* 1. Modifiche ai testi principali */
+    /* --- Gestione Home Page su Mobile --- */
     .home-main-title {
         font-size: 2.3rem;
     }
     
-    /* 2. Trasformazione della Griglia: i box si mettono uno sotto l'altro */
     .home-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* I 3 box si dispongono uno sotto l'altro */
         gap: 20px;
-        padding: 0 10px;
+        padding: 0 5px;
     }
 
-    /* 3. Mostra l'icona Hamburger */
+    /* --- Gestione Menu a Tendina Hamburger --- */
     .hamburger {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         gap: 5px;
         cursor: pointer;
+        z-index: 1010;
     }
 
     .hamburger span {
@@ -218,9 +309,8 @@ header {
         transition: 0.3s;
     }
 
-    /* 4. Trasformazione del Menu in tendina a comparsa */
     .nav-menu {
-        display: none; /* Nasconde il menu di default su smartphone */
+        display: none; /* Nasconde la lista di base */
         flex-direction: column;
         position: absolute;
         top: 100%;
@@ -234,8 +324,31 @@ header {
         box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
 
-    /* Classe attivata via JavaScript quando clicchi l'hamburger */
     .nav-menu.active {
-        display: flex;
+        display: flex; /* Rivela la tendina quando attiva */
+    }
+
+    /* --- Protezione Tabella Classifica su Mobile (Per i nomi in stampatello) --- */
+    .kl-table th, .kl-table td {
+        padding: 10px 3px; /* Riduce i margini per risparmiare spazio orizzontale */
+        font-size: 0.78rem;  /* Rimpiccolisce i numeri (V, S, PT) per non stringere i nomi */
+    }
+    
+    .team-name {
+        padding-left: 6px !important;
+        gap: 6px;
+    }
+
+    .team-name span {
+        font-size: 0.75rem; /* Dimensione di sicurezza per far entrare "DARK KNIGHTS" o "KING LIONS FC" */
+    }
+    
+    .team-name img {
+        height: 18px; /* Rimpiccolisce il logo dello stemma per dare priorità al testo */
+        width: 18px;
+    }
+    
+    .pos-num {
+        width: 28px;
     }
 }
