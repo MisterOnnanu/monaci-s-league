@@ -24,6 +24,7 @@
             <nav class="nav-menu" id="nav-links">
                 <a href="index.html">Home</a>
                 <a href="squadre.html">Squadre</a>
+                <a href="calendario.html">Calendario</a>
                 <a href="risultati.html">Risultati</a>
                 <a href="classifica.html">Classifica</a>
                 <a href="marcatori.html">Marcatori</a>
@@ -32,14 +33,12 @@
     </header>
 
     <main class="container">
-        
         <section class="home-hero">
             <h1 class="home-main-title">MONACI'S LEAGUE</h1>
             <p class="home-subtitle">Sito ufficiale del torneo</p>
         </section>
 
         <section class="home-grid">
-            
             <div class="home-card">
                 <h3>Ultimi Risultati</h3>
                 <div class="card-content">
@@ -52,9 +51,9 @@
             <div class="home-card">
                 <h3>Classifica</h3>
                 <div class="card-content ordered-list">
-                    <p>1. Monaci FC - 28 pt</p>
-                    <p>2. Spartans - 24 pt</p>
-                    <p>3. Warriors - 22 pt</p>
+                    <p>1. CALABRONI FC - 28 pt</p>
+                    <p>2. GRIZZLY FC - 24 pt</p>
+                    <p>3. DARK KNIGHTS - 22 pt</p>
                 </div>
             </div>
 
@@ -66,18 +65,13 @@
                     <p>3. Verdi - 9</p>
                 </div>
             </div>
-
         </section>
-
     </main>
 
     <script>
         const hamburger = document.getElementById('hamburger-menu');
         const navMenu = document.getElementById('nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+        hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
     </script>
 </body>
 </html>
