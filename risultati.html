@@ -6,7 +6,6 @@
     <link rel='stylesheet' href='style.css'>
     <title>Risultati - Monaci's League</title>
     <style>
-        /* STILI SPECIFICI PER I RISULTATI CON MARCATORI A TENDINA */
         .res-container {
             max-width: 800px;
             margin: 40px auto;
@@ -16,7 +15,7 @@
             margin-bottom: 35px;
         }
         .giornata-title {
-            color: var(--gold);
+            color: #ffa800;
             font-size: 1.5rem;
             font-weight: 800;
             text-align: center;
@@ -25,14 +24,13 @@
             letter-spacing: 1px;
         }
         
-        /* STILE DELLA NUOVA LEGENDA COMPLETA IN FONDO ALLA PAGINA */
+        /* LEGENDA IN FONDO */
         .bottom-legend-container {
             margin-top: 40px;
             padding: 20px;
             background: #111;
             border: 1px solid #222;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
         .bottom-legend-title {
             color: #ffa800;
@@ -59,33 +57,27 @@
             color: #ccc;
         }
         
-        /* ICONE DELLA LEGENDA */
-        .ball-icon {
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-        .ball-indigo { color: #4b0082; text-shadow: 0 0 5px rgba(75, 0, 130, 0.5); }
-        .ball-red { color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.5); }
-        .ball-green { color: #2ecc71; text-shadow: 0 0 5px rgba(46, 204, 113, 0.5); }
+        .ball-icon { font-size: 1.2rem; line-height: 1; }
+        .ball-indigo { color: #8a2be2; }
+        .ball-red { color: #ff3333; }
+        .ball-green { color: #2ecc71; }
         
         .card-icon {
             width: 14px;
             height: 20px;
             border-radius: 3px;
             display: inline-block;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .card-yellow { background-color: #ffcc00; border: 1px solid #b38f00; }
         .card-red { background-color: #ff3333; border: 1px solid #b32424; }
 
-        /* STRUTTURA DELLE TENDINE ACCORDION */
+        /* ACCORDION */
         .match-accordion {
             background-color: #141414;
             border: 1px solid #222;
             border-radius: 8px;
             margin-bottom: 15px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .match-header {
             display: flex;
@@ -93,18 +85,9 @@
             justify-content: space-between;
             padding: 18px 20px;
             cursor: pointer;
-            transition: background 0.2s ease;
         }
-        .match-header:hover {
-            background-color: #1c1c1c;
-        }
-        .team-side {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 1.05rem;
-        }
+        .match-header:hover { background-color: #1c1c1c; }
+        .team-side { flex: 1; display: flex; align-items: center; font-weight: bold; font-size: 1.05rem; }
         .team-side.home { justify-content: flex-end; text-align: right; }
         .team-side.away { justify-content: flex-start; text-align: left; }
         .team-side img { width: 30px; height: 30px; object-fit: contain; }
@@ -121,7 +104,6 @@
             margin: 0 20px;
             min-width: 60px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(255,168,0,0.2);
         }
         
         .match-details {
@@ -139,22 +121,20 @@
             font-size: 0.9rem;
             color: #aaa;
         }
-        .scorers-column {
-            flex: 1;
-        }
+        .scorers-column { flex: 1; }
         .scorers-column.home { text-align: right; }
         .scorers-column.away { text-align: left; }
         .scorers-column div { margin-bottom: 6px; font-weight: 600; }
         
-        /* SPAN COLORATI DA USARE ALL'INTERNO DELLE TENDINE SE NECESSARIO */
         .txt-indigo { color: #8a2be2; font-weight: bold; }
         .txt-red { color: #ff3333; font-weight: bold; }
         .txt-green { color: #2ecc71; font-weight: bold; }
+        .txt-yellow { color: #ffcc00; font-weight: bold; }
 
         @media (max-width: 576px) {
             .team-side { font-size: 0.9rem; }
             .score-side { font-size: 1rem; padding: 4px 12px; margin: 0 10px; min-width: 45px; }
-            .details-inner { flex-direction: column; text-align: center !important; }
+            .details-inner { flex-direction: column; }
             .scorers-column { text-align: center !important; }
         }
     </style>
@@ -167,11 +147,7 @@
                 <img src="logo.png" alt="Logo" class="logo-img">
                 <span>MONACI'S LEAGUE</span>
             </div>
-            
-            <div class="hamburger" id="hamburger-menu">
-                <span></span><span></span><span></span>
-            </div>
-
+            <div class="hamburger" id="hamburger-menu"><span></span><span></span><span></span></div>
             <nav class="nav-menu" id="nav-links">
                 <a href="index.html">Home</a>
                 <a href="squadre.html">Squadre</a>
@@ -191,25 +167,26 @@
 
             <div class="match-accordion">
                 <div class="match-header" onclick="toggleAccordion(this)">
-                    <div class="team-side home">
-                        <span>GRIZZLY FC</span> <img src="grizzly.png" alt="">
-                    </div>
+                    <div class="team-side home"><span>GRIZZLY FC</span> <img src="grizzly.png" alt=""></div>
                     <div class="score-side">11 - 10</div>
-                    <div class="team-side away">
-                        <img src="dark-knights.png" alt=""> <span>DARK KNIGHTS</span>
-                    </div>
+                    <div class="team-side away"><img src="dark-knights.png" alt=""> <span>DARK KNIGHTS</span></div>
                 </div>
                 <div class="match-details">
                     <div class="details-inner">
                         <div class="scorers-column home">
                             <div>7', 12', 15', 30', 44' VENTRELLA</div>
-                            <div>18', 22' DI CORTESE</div>
-                            <div>40' <span class="txt-green">M. MAFFIONE (Secret Card)</span></div>
+                            <div>18', 22' BATTAGLIA</div>
+                            <div>40' <span class="txt-green">⚽ MAFFIONE M. (Secret Card)</span></div>
+                            <div>38' GRIMALDI</div>
+                            <div><span class="txt-indigo">⚽ 25' RIG. PRES. SEGNATO (DICORATO)</span></div>
+                            <div><span class="txt-yellow">🟨 Giallo:</span> GRIMALDI (29')</div>
                         </div>
                         <div class="scorers-column away">
                             <div>5', 9' CORCELLA L.</div>
                             <div>14', 27', 33' CORCELLA G.</div>
-                            <div>49' DI TOCCO</div>
+                            <div>49' TORRE</div>
+                            <div>10', 19' DICATALDO N.</div>
+                            <div><span class="txt-indigo">⚽ 25' RIG. PRES. SEGNATO (DICORATO)</span></div>
                         </div>
                     </div>
                 </div>
@@ -217,23 +194,24 @@
 
             <div class="match-accordion">
                 <div class="match-header" onclick="toggleAccordion(this)">
-                    <div class="team-side home">
-                        <span>BIRRAREAL FC</span> <img src="birrareal.png" alt="">
-                    </div>
+                    <div class="team-side home"><span>BIRRAREAL FC</span> <img src="birrareal.png" alt=""></div>
                     <div class="score-side">12 - 14</div>
-                    <div class="team-side away">
-                        <img src="king-lions.png" alt=""> <span>KING LIONS FC</span>
-                    </div>
+                    <div class="team-side away"><img src="king-lions.png" alt=""> <span>KING LIONS FC</span></div>
                 </div>
                 <div class="match-details">
                     <div class="details-inner">
                         <div class="scorers-column home">
-                            <div>10', 11', 14' MORELLI</div>
-                            <div>25' DI GIULIO</div>
+                            <div>10', 11', 14', 19', 24', 33', 38', 42', 45', 49' MORELLI</div>
+                            <div>25' DELVECCHIO</div>
+                            <div><span class="txt-indigo">❌ 25' RIG. PRES. PARATO (DORONZO)</span></div>
+                            <div><span class="txt-red">⚽ 8' AUTOGOL:</span> MAFFIONE L.</div>
                         </div>
                         <div class="scorers-column away">
-                            <div>4', 8', 19', 22', 31' ANTONUCCI</div>
-                            <div>40', 42' VIOLANTE</div>
+                            <div>4', 8', 19', 22', 31', 34', 40', 44' ANTONUCCI</div>
+                            <div>42' VIOLANTE</div>
+                            <div>22' LANOTTE</div>
+                            <div><span class="txt-indigo">⚽ 25' RIG. PRES. SEGNATO (TUPPUTI)</span></div>
+                            <div><span class="txt-yellow">🟨 Giallo:</span> ANTONUCCI (15')</div>
                         </div>
                     </div>
                 </div>
@@ -241,24 +219,21 @@
 
             <div class="match-accordion">
                 <div class="match-header" onclick="toggleAccordion(this)">
-                    <div class="team-side home">
-                        <span>POLAR FC</span> <img src="polar.png" alt="">
-                    </div>
+                    <div class="team-side home"><span>POLAR FC</span> <img src="polar.png" alt=""></div>
                     <div class="score-side">13 - 14</div>
-                    <div class="team-side away">
-                        <img src="calabroni.png" alt=""> <span>CALABRONI FC</span>
-                    </div>
+                    <div class="team-side away"><img src="calabroni.png" alt=""> <span>CALABRONI FC</span></div>
                 </div>
                 <div class="match-details">
                     <div class="details-inner">
                         <div class="scorers-column home">
-                            <div>12', 15', 29' DIELLA</div>
+                            <div>12', 15', 29', 31', 35', 40' DIELLA</div>
                             <div>38' TORRE</div>
+                            <div><span class="txt-indigo">⚽ 23' RIG. PRES. SEGNATO (CAMPANIELLO)</span></div>
                         </div>
                         <div class="scorers-column away">
                             <div>20', 21', 22', 22', 30', 34' GIANNELLA</div>
-                            <div><span class="txt-red">AUT. 5' CALABRESE F.</span></div>
-                            <div><span class="txt-indigo">23' RIG. PRES. CAMPANIELLO</span></div>
+                            <div><span class="txt-red">⚽ 5' AUTOGOL:</span> CALABRESE F.</div>
+                            <div><span class="txt-indigo">❌ 23' RIG. PRES. PARATO (MONTENEGRO)</span></div>
                         </div>
                     </div>
                 </div>
@@ -269,44 +244,23 @@
         <div class="bottom-legend-container">
             <div class="bottom-legend-title">Legenda Eventi</div>
             <div class="legend-grid">
-                <div class="legend-item">
-                    <span class="ball-icon ball-indigo">⚽</span>
-                    <span>Gol / No Gol Rigore Presidenziale</span>
-                </div>
-                <div class="legend-item">
-                    <span class="ball-icon ball-red">⚽</span>
-                    <span>Autogol</span>
-                </div>
-                <div class="legend-item">
-                    <span class="ball-icon ball-green">⚽</span>
-                    <span>Gol con Secret Card</span>
-                </div>
-                <div class="legend-item">
-                    <span class="card-icon card-yellow"></span>
-                    <span>Cartellino Giallo</span>
-                </div>
-                <div class="legend-item">
-                    <span class="card-icon card-red"></span>
-                    <span>Cartellino Rosso</span>
-                </div>
+                <div class="legend-item"><span class="ball-icon ball-indigo">⚽</span><span>Gol / No Gol Rigore Presidenziale</span></div>
+                <div class="legend-item"><span class="ball-icon ball-red">⚽</span><span>Autogol</span></div>
+                <div class="legend-item"><span class="ball-icon ball-green">⚽</span><span>Gol con Secret Card</span></div>
+                <div class="legend-item"><span class="card-icon card-yellow"></span><span>Cartellino Giallo</span></div>
+                <div class="legend-item"><span class="card-icon card-red"></span><span>Cartellino Rosso</span></div>
             </div>
         </div>
-
     </div>
 
     <script>
-        // Gestione Menu Mobile
         const hamburger = document.getElementById('hamburger-menu');
         const navMenu = document.getElementById('nav-links');
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+        hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
 
-        // Gestione Tendina Marcatori
         function toggleAccordion(element) {
             const accordion = element.parentElement;
             const details = accordion.querySelector('.match-details');
-            
             if (accordion.classList.contains('active')) {
                 accordion.classList.remove('active');
                 details.style.maxHeight = null;
@@ -315,7 +269,6 @@
                     acc.classList.remove('active');
                     acc.querySelector('.match-details').style.maxHeight = null;
                 });
-                
                 accordion.classList.add('active');
                 details.style.maxHeight = details.scrollHeight + "px";
             }
