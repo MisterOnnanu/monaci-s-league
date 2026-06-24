@@ -19,7 +19,8 @@
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 35px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n        }
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
         
         .cal-giornata h3 {
             color: #ffa800; /* Oro */
@@ -106,19 +107,66 @@
             box-shadow: 0 2px 8px rgba(255, 168, 0, 0.3);
         }
         
-        /* Responsive */
+        /* ==========================================================================
+           OTTIMIZZAZIONE COSTRITTIVA PER SMARTPHONE (MOBILE)
+           ========================================================================== */
         @media (max-width: 576px) {
+            .cal-container {
+                padding: 0 8px; /* Ottimizza lo spazio esterno sui telefoni stretti */
+            }
+
+            .cal-giornata {
+                padding: 15px 10px; /* Riduce i padding interni per guadagnare spazio orizzontale */
+            }
+
+            .match-row {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100%;
+            }
+
             .cal-team {
-                font-size: 0.9rem;
+                font-size: 0.78rem !important; /* Dimensione ideale per non far spezzare nessuna squadra */
+                flex: 1 1 0% !important; /* Costringe le due colonne laterali ad essere perfettamente uguali */
+                width: 40%;
             }
+
+            .cal-team.home {
+                justify-content: flex-end !important;
+            }
+
+            .cal-team absenteeism {
+                justify-content: flex-start !important;
+            }
+
+            .cal-team span {
+                white-space: nowrap !important; /* Impedisce tassativamente al testo di andare a capo verticalmente */
+                overflow: hidden;
+            }
+
             .cal-team img {
-                width: 26px;
-                height: 26px;
+                width: 20px !important;  /* Loghi leggermente scalati per salvaguardare il testo orizzontale */
+                height: 20px !important;
+                flex-shrink: 0 !important; /* Evita che il logo si schiacci */
             }
+
+            .cal-team.home img {
+                margin-left: 6px !important; /* Spazio ridotto ma armonioso sul telefono */
+            }
+            
+            .cal-team.away img {
+                margin-right: 6px !important;
+            }
+
             .match-vs {
-                margin: 0 10px;
-                padding: 3px 8px;
-                font-size: 0.8rem;
+                margin: 0 6px !important; /* Spaziatura esterna fissa e ridotta */
+                padding: 3px 6px !important; /* Ridimensionamento proporzionato del rettangolo */
+                font-size: 0.75rem !important;
+                min-width: 34px !important;
+                flex-shrink: 0 !important; /* Blocca il VS impedendogli di decentrarsi o deformarsi */
+                display: inline-block;
+                text-align: center;
             }
         }
     </style>
