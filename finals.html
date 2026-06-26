@@ -30,25 +30,23 @@
             letter-spacing: 2px;
         }
 
-        /* STRUTTURA TABELLONE COERENTE (PC E MOBILE CON SWIPE) */
+        /* STRUTTURA TABELLONE BLOCCHERATO (PC E MOBILE CON SWIPE) */
         .bracket-scroll-area {
-            overflow-x: auto; /* Permette lo swipe orizzontale perfetto su smartphone */
+            overflow-x: auto; /* Permette lo swipe orizzontale su smartphone senza spaccare le box */
             padding-bottom: 20px;
         }
 
         .bracket-tournament {
             display: flex;
             justify-content: space-between;
-            min-width: 850px; /* Forzato per mantenere l'orizzontalità fissa ovunque */
-            gap: 30px;
+            min-width: 900px; /* Garantisce la disposizione a 3 colonne parallele anche su mobile */
+            gap: 20px;
         }
 
         .bracket-column {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            height: 650px;
-            width: 31%;
+            width: 32%;
         }
 
         .column-title {
@@ -63,6 +61,31 @@
             margin-bottom: 20px;
         }
 
+        /* GRUPPI DI ALLINEAMENTO STRUTTURALE (I TRATTINI VERDI E IL CERCHIO ROSSO) */
+        .bracket-cell-container {
+            display: flex;
+            flex-direction: column;
+            height: 640px; /* Altezza fissa dell'area di gioco */
+        }
+
+        /* Colonna Quarti: Spaziatura equa dei 4 blocchi principali */
+        .col-quarti {
+            justify-content: space-between;
+        }
+
+        /* Colonna Semifinali: Centrate perfettamente rispetto ai quarti sopra e sotto di esse */
+        .col-semifinali {
+            justify-content: space-around;
+            padding: 25px 0;
+            box-sizing: border-box;
+        }
+
+        /* Colonna Finali: Centralità totale del tabellone */
+        .col-finali {
+            justify-content: center;
+            gap: 60px; /* Distanza bilanciata tra la finalissima e il 3°/4° posto */
+        }
+
         /* STRUTTURA DELLE BOX DEI MATCH */
         .match-card {
             background: var(--box-bg);
@@ -70,6 +93,14 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 100%;
+        }
+
+        /* Sotto-blocco accoppiato per i quarti con esenzione */
+        .quarto-esenzione-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             width: 100%;
         }
 
@@ -172,156 +203,169 @@
             <div class="bracket-tournament">
 
                 <div class="bracket-column">
-                    <div><div class="column-title">Quarti di Finale</div></div>
-                    
-                    <div class="match-card">
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="calabroni.png" alt="">
-                                <span>Calabroni FC</span>
+                    <div class="column-title">Quarti di Finale</div>
+                    <div class="bracket-cell-container col-quarti">
+                        
+                        <div class="quarto-esenzione-group">
+                            <div class="match-card">
+                                <div class="match-row">
+                                    <div class="team-details">
+                                        <img src="calabroni.png" alt="">
+                                        <span>Calabroni FC</span>
+                                    </div>
+                                    <span class="esenzione-label">Esenzione</span>
+                                </div>
+                                <div class="match-row">
+                                    <div class="team-details">
+                                        <div class="placeholder-icon">?</div>
+                                        <span style="color: var(--text-muted);">Sconosciuto</span>
+                                    </div>
+                                    <div class="score-display">-</div>
+                                </div>
                             </div>
-                            <span class="esenzione-label">Esenzione</span>
                         </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span style="color: var(--text-muted);">Sconosciuto</span>
-                            </div>
-                            <div class="score-display">-</div>
-                        </div>
-                    </div>
 
-                    <div class="match-card">
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="dark-knights.png" alt="">
-                                <span>Dark Knights</span>
+                        <div class="match-card">
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <img src="dark-knights.png" alt="">
+                                    <span>Dark Knights</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="grizzly.png" alt="">
-                                <span>Grizzly FC</span>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <img src="grizzly.png" alt="">
+                                    <span>Grizzly FC</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
                         </div>
-                    </div>
 
-                    <div class="match-card">
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="king-lions.png" alt="">
-                                <span>King Lions FC</span>
+                        <div class="quarto-esenzione-group">
+                            <div class="match-card">
+                                <div class="match-row">
+                                    <div class="team-details">
+                                        <img src="king-lions.png" alt="">
+                                        <span>King Lions FC</span>
+                                    </div>
+                                    <span class="esenzione-label">Esenzione</span>
+                                </div>
+                                <div class="match-row">
+                                    <div class="team-details">
+                                        <div class="placeholder-icon">?</div>
+                                        <span style="color: var(--text-muted);">Sconosciuto</span>
+                                    </div>
+                                    <div class="score-display">-</div>
+                                </div>
                             </div>
-                            <span class="esenzione-label">Esenzione</span>
                         </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span style="color: var(--text-muted);">Sconosciuto</span>
-                            </div>
-                            <div class="score-display">-</div>
-                        </div>
-                    </div>
 
-                    <div class="match-card">
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="birrareal.png" alt="">
-                                <span>FC Birrareal</span>
+                        <div class="match-card">
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <img src="birrareal.png" alt="">
+                                    <span>FC Birrareal</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="polar.png" alt="">
-                                <span>Polar FC</span>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <img src="polar.png" alt="">
+                                    <span>Polar FC</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="bracket-column">
-                    <div><div class="column-title">Semifinali</div></div>
-                    
-                    <div class="match-card">
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="calabroni.png" alt="">
-                                <span>Calabroni FC</span>
-                            </div>
-                            <div class="score-display">-</div>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span style="color: var(--text-muted);">Sconosciuto</span>
-                            </div>
-                            <div class="score-display">-</div>
-                        </div>
-                    </div>
-
-                    <div class="match-card">
-                        <div class="match-row">
-                            <div class="team-details">
-                                <img src="king-lions.png" alt="">
-                                <span>King Lions FC</span>
-                            </div>
-                            <div class="score-display">-</div>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span style="color: var(--text-muted);">Sconosciuto</span>
-                            </div>
-                            <div class="score-display">-</div>
-                        </div>
                     </div>
                 </div>
 
                 <div class="bracket-column">
-                    <div><div class="column-title">Finali</div></div>
-                    
-                    <div class="match-card" style="border: 1px solid var(--gold); margin-top: 40px;">
-                        <div class="match-row" style="background: rgba(255, 204, 0, 0.1); height: 30px; justify-content: center;">
-                            <span style="color: var(--gold); font-size: 0.75rem; font-weight: 900; letter-spacing: 1px;">FINALE 1°/2° POSTO</span>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span>Sconosciuto</span>
+                    <div class="column-title">Semifinali</div>
+                    <div class="bracket-cell-container col-semifinali">
+                        
+                        <div class="match-card">
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <img src="calabroni.png" alt="">
+                                    <span>Calabroni FC</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span>Sconosciuto</span>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <div class="placeholder-icon">?</div>
+                                    <span style="color: var(--text-muted);">Sconosciuto</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
                         </div>
-                    </div>
 
-                    <div class="match-card" style="margin-bottom: 40px;">
-                        <div class="match-row" style="background: rgba(255, 255, 255, 0.05); height: 30px; justify-content: center;">
-                            <span style="color: #aaa; font-size: 0.75rem; font-weight: 900; letter-spacing: 1px;">FINALE 3°/4° POSTO</span>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span style="color: var(--text-muted);">Sconosciuto</span>
+                        <div class="match-card">
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <img src="king-lions.png" alt="">
+                                    <span>King Lions FC</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
-                        </div>
-                        <div class="match-row">
-                            <div class="team-details">
-                                <div class="placeholder-icon">?</div>
-                                <span style="color: var(--text-muted);">Sconosciuto</span>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <div class="placeholder-icon">?</div>
+                                    <span style="color: var(--text-muted);">Sconosciuto</span>
+                                </div>
+                                <div class="score-display">-</div>
                             </div>
-                            <div class="score-display">-</div>
                         </div>
+
+                    </div>
+                </div>
+
+                <div class="bracket-column">
+                    <div class="column-title">Finali</div>
+                    <div class="bracket-cell-container col-finali">
+                        
+                        <div class="match-card" style="border: 1px solid var(--gold);">
+                            <div class="match-row" style="background: rgba(255, 204, 0, 0.1); height: 30px; justify-content: center;">
+                                <span style="color: var(--gold); font-size: 0.75rem; font-weight: 900; letter-spacing: 1px;">FINALE 1°/2° POSTO</span>
+                            </div>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <div class="placeholder-icon">?</div>
+                                    <span>Sconosciuto</span>
+                                </div>
+                                <div class="score-display">-</div>
+                            </div>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <div class="placeholder-icon">?</div>
+                                    <span>Sconosciuto</span>
+                                </div>
+                                <div class="score-display">-</div>
+                            </div>
+                        </div>
+
+                        <div class="match-card">
+                            <div class="match-row" style="background: rgba(255, 255, 255, 0.05); height: 30px; justify-content: center;">
+                                <span style="color: #aaa; font-size: 0.75rem; font-weight: 900; letter-spacing: 1px;">FINALE 3°/4° POSTO</span>
+                            </div>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <div class="placeholder-icon">?</div>
+                                    <span style="color: var(--text-muted);">Sconosciuto</span>
+                                </div>
+                                <div class="score-display">-</div>
+                            </div>
+                            <div class="match-row">
+                                <div class="team-details">
+                                    <div class="placeholder-icon">?</div>
+                                    <span style="color: var(--text-muted);">Sconosciuto</span>
+                                </div>
+                                <div class="score-display">-</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
